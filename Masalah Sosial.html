@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Permasalahan Sosial (Sosiologi Kelas 11)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tailwind untuk font Inter dan warna dasar -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // WARNA UTAMA BERUBAH MENJADI HIJAU MUDA (#34D399 / Emerald-400)
+                        'sosiologi-primary': '#34D399', 
+                        'sosiologi-light': '#D1FAE5', // Emerald-100
+                        'sosiologi-dark': '#1E293B', // Slate-800
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Mengatur scrollbar agar lebih halus */
+        .content-area::-webkit-scrollbar {
+            width: 8px;
+        }
+        .content-area::-webkit-scrollbar-thumb {
+            background-color: '#059669'; /* Medium Emerald */
+            border-radius: 4px;
+        }
+        .content-area::-webkit-scrollbar-track {
+            background-color: '#D1FAE5'; /* Emerald-100 */
+        }
+        
+        /* Style untuk tab aktif */
+        .tab-button.active {
+            @apply bg-sosiologi-light border-sosiologi-primary text-sosiologi-primary font-semibold shadow-inner;
+        }
+
+        /* Styling umum untuk card konten */
+        .content-card {
+            @apply bg-white p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl border border-gray-100;
+        }
+
+        /* Styling untuk kuis/latihan */
+        .quiz-option {
+            @apply block w-full text-left p-3 my-2 rounded-lg border-2 border-gray-300 bg-white hover:bg-emerald-50 transition duration-150 cursor-pointer;
+        }
+        /* Style untuk MCMA (Multiple Answer) */
+        .quiz-option.mcma-selected {
+            @apply bg-emerald-100 border-sosiologi-primary font-medium;
+        }
+
+        .quiz-option.correct {
+            @apply bg-green-100 border-green-500 text-green-800 font-bold;
+        }
+        .quiz-option.incorrect {
+            @apply bg-red-100 border-red-500 text-red-800 font-bold;
+        }
+
+        /* Styling untuk Soal Kategori */
+        .categorical-option {
+            @apply px-3 py-1 rounded-md text-sm border transition duration-150 cursor-pointer;
+        }
+        .categorical-option.selected {
+            @apply bg-sosiologi-primary text-white border-sosiologi-primary;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col font-sans">
+
+    <!-- Header - BACKGROUND SEKARANG HIJAU MUDA -->
+    <header class="bg-sosiologi-primary shadow-md py-4 md:py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+            
+            <!-- 
+            *** BAGIAN LOGO (MENGGUNAKAN SVG STABIL) ***
+            Gambar di bawah adalah ikon toga yang pasti muncul. Jika Anda memiliki URL publik logo sekolah (bukan link Google Drive), ganti seluruh tag <div> ini dengan tag <img> di bawah ini:
+            
+            <img 
+                src="URL_PUBLIK_LOGO_SEKOLAH_ANDA" 
+                alt="Logo Sekolah SMAN 1 Tumijajar" 
+                class="hidden sm:block h-16 w-16 mr-4 rounded-full border-2 border-white object-cover"
+            >
+            -->
+            <div class="hidden sm:flex items-center justify-center h-16 w-16 mr-4 rounded-full border-2 border-white bg-white p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full">
+                    <path d="M4 17.5V14l8-4 8 4v3.5"/>
+                    <path d="M4 14l8-4 8 4"/>
+                    <path d="M12 4l8 4-8 4-8-4z"/>
+                </svg>
+            </div>
+
+
+            <div>
+                <!-- TEKS SEKARANG HIJAU GELAP AGAR KONTRAST -->
+                <h1 class="text-2xl md:text-3xl font-extrabold text-sosiologi-dark text-center">
+                    Permasalahan Sosial (Sosiologi Kelas 11)
+                </h1>
+                <!-- Penambahan nama pembuat media -->
+                <p class="text-sosiologi-dark text-opacity-80 text-center mt-1 text-sm">Media Pembelajaran Interaktif oleh **Yuni Sudiasih**</p>
+            </div>
+            
+            <!-- Placeholder Logo (duplikat untuk simetri pada desktop) -->
+            <div class="hidden sm:block h-16 w-16 ml-4"></div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+        <div class="flex flex-col lg:flex-row gap-6">
+
+            <!-- Sidebar Navigasi (Menu) -->
+            <nav class="lg:w-1/4">
+                <div class="bg-white rounded-xl shadow-xl p-4 sticky top-4">
+                    <h2 class="text-lg font-bold text-sosiologi-dark mb-4 border-b pb-2">Daftar Isi</h2>
+                    <div class="flex flex-wrap lg:flex-col gap-2" id="nav-tabs">
+                        <!-- Tombol-tombol navigasi akan diisi oleh JavaScript -->
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="lg:w-3/4 content-area overflow-y-auto" id="content-display">
+                <!-- Konten akan dimuat di sini -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
+            &copy; 2024 Media Pembelajaran Interaktif Sosiologi. Selamat Belajar!
+        </div>
+    </footer>
+
+    <script>
+        // Data Materi dan Kuis
+        const materials = [
+            { id: 'definisi', title: '1. Pengertian Masalah Sosial', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Pengertian dan Batasan Masalah Sosial</h2>
+                    <p class="text-gray-700 mb-4">**Masalah Sosial** adalah suatu kondisi atau situasi yang bertentangan dengan nilai-nilai masyarakat dan dialami oleh sebagian besar warga, serta memerlukan penanganan kolektif.</p>
+                    
+                    <!-- BAGIAN TAMBAHAN: VISUALISASI SVG - PANAH LENGKUNG DIPERBAIKI PRESISI -->
+                    <h3 class="font-bold text-xl text-sosiologi-dark mt-6 mb-2">Visualisasi Ketidaksesuaian Nilai (Social Gap)</h3>
+                    <div class="p-4 mb-6 bg-sosiologi-light rounded-lg border-2 border-sosiologi-primary">
+                        <svg width="100%" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <!-- Tanda panah diperkecil dan refX disesuaikan agar ujungnya pas di titik akhir path -->
+                                <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+                                    <polygon points="0 0, 6 2, 0 4" fill="#EF4444" />
+                                </marker>
+                            </defs>
+                            
+                            <!-- Blok Nilai yang Diinginkan (Ideal) -->
+                            <rect x="20" y="20" width="160" height="40" rx="5" fill="#059669"/>
+                            <!-- Teks Centered Vertically -->
+                            <text x="100" y="38" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="white">NILAI IDEAL</text>
+                            <text x="100" y="52" font-family="Inter" font-size="10" text-anchor="middle" fill="white">(Apa yang Seharusnya)</text>
+
+                            <!-- Blok Kenyataan Sosial (Realitas) -->
+                            <rect x="220" y="90" width="160" height="40" rx="5" fill="#3B82F6"/>
+                            <!-- Teks Centered Vertically -->
+                            <text x="300" y="108" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="white">REALITAS SOSIAL</text>
+                            <text x="300" y="122" font-family="Inter" font-size="10" text-anchor="middle" fill="white">(Apa yang Terjadi)</text>
+
+                            <!-- Garis Kesenjangan (Curved Path) -->
+                            <!-- START: 180 40 (Mid-right Ideal) 
+                                 CONTROL: 250 10 (Titik kontrol busur) 
+                                 END: 380 95 (Ditarik tepat ke koordinat X batas kanan dan y sedikit di atas batas atas) -->
+                            <path d="M 180 40 Q 250 10, 380 95" 
+                                stroke="#EF4444" 
+                                stroke-width="3" 
+                                fill="none"
+                                marker-end="url(#arrowhead)"/>
+
+                            <!-- Label diposisikan di tengah diagram (area yang kini tidak terhalang) -->
+                            <text x="200" y="75" font-family="Inter" font-size="14" font-weight="bold" text-anchor="middle" fill="#EF4444">MASALAH SOSIAL</text>
+                        </svg>
+                    </div>
+                    <!-- AKHIR BAGIAN VISUALISASI SVG -->
+
+                    <div class="bg-emerald-50 p-4 rounded-lg border-l-4 border-sosiologi-primary">
+                        <p class="font-semibold text-sosiologi-dark mb-2">Menurut Soerjono Soekanto:</p>
+                        <p class="text-gray-700 italic">Masalah sosial adalah ketidaksesuaian antara unsur-unsur kebudayaan atau masyarakat yang membahayakan kehidupan kelompok sosial.</p>
+                    </div>
+                    
+                    <h3 class="font-bold text-xl text-sosiologi-dark mt-6 mb-2">Kriteria Utama Masalah Sosial:</h3>
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>**Tidak Adanya Kesesuaian Nilai:** Terdapat ketidakcocokan antara standar nilai yang dianut masyarakat dan realitas sosial.</li>
+                        <li>**Sumber Masalah:** Masalah berasal dari kondisi sosial, bukan hanya kondisi individu.</li>
+                        <li>**Pihak yang Menetapkan:** Ada kelompok yang mendefinisikan kondisi tersebut sebagai masalah.</li>
+                        <li>**Memerlukan Tindakan Kolektif:** Masalah harus diatasi bersama, bukan secara individual.</li>
+                    </ul>
+                    
+                </div>
+            ` },
+            { id: 'kriteria', title: '2. Kriteria & Ciri-ciri', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Kriteria dan Ciri-ciri Masalah Sosial</h2>
+                    <p class="text-gray-700 mb-6">Sebuah fenomena dapat diakui sebagai masalah sosial jika memenuhi ciri-ciri berikut:</p>
+                    
+                    <ul class="space-y-4">
+                        <li class="p-3 bg-gray-50 rounded-lg border-l-4 border-yellow-500 shadow-sm">
+                            <div class="font-bold text-sosiologi-dark">Pihak yang Menetapkan (Aktor)</div>
+                            <p class="text-gray-700 text-sm mt-1">Harus ada pihak yang terpengaruh dan menyuarakan bahwa situasi tersebut tidak normal.</p>
+                            <p class="text-sm italic text-gray-600 mt-2">
+                                **Contoh:** Sekelompok warga yang berdemonstrasi menuntut pemerintah mengatasi polusi udara. Walaupun sebagian besar warga tidak peduli, kelompok ini telah bertindak sebagai **aktor** yang menetapkan polusi sebagai masalah sosial.
+                            </p>
+                        </li>
+                        <li class="p-3 bg-gray-50 rounded-lg border-l-4 border-green-500 shadow-sm">
+                            <div class="font-bold text-sosiologi-dark">Dapat Berlangsung Lama</div>
+                            <p class="text-gray-700 text-sm mt-1">Fenomena sosial yang temporer (sebentar) biasanya bukan masalah sosial, melainkan masalah yang bertahan dalam waktu lama.</p>
+                            <p class="text-sm italic text-gray-600 mt-2">
+                                **Contoh:** Kenaikan harga beras musiman (sementara) **bukan** masalah sosial, tetapi **Kemiskinan Struktural** yang berlangsung dari generasi ke generasi adalah masalah sosial.
+                            </p>
+                        </li>
+                        <li class="p-3 bg-gray-50 rounded-lg border-l-4 border-red-500 shadow-sm">
+                            <div class="font-bold text-sosiologi-dark">Pelanggaran Norma Penting</div>
+                            <p class="text-gray-700 text-sm mt-1">Masalah tersebut harus melanggar norma atau nilai dasar yang dianut oleh sebagian besar masyarakat (mayoritas).</p>
+                            <p class="text-sm italic text-gray-600 mt-2">
+                                **Contoh:** Perjudian dan penyalahgunaan narkoba adalah pelanggaran terhadap **norma hukum dan kesusilaan** yang dianggap penting oleh mayoritas, sehingga dikategorikan sebagai masalah sosial.
+                            </p>
+                        </li>
+                        <li class="p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                            <div class="font-bold text-sosiologi-dark">Manifestasi Disorganisasi</div>
+                            <p class="text-gray-700 text-sm mt-1">Merupakan hasil dari ketidakseimbangan atau disorganisasi struktur dalam masyarakat.</p>
+                            <p class="text-sm italic text-gray-600 mt-2">
+                                **Contoh:** **Kriminalitas** adalah manifestasi dari kegagalan sistem sosialisasi (lembaga keluarga) dan sistem ekonomi (ketersediaan lapangan kerja) untuk berfungsi secara harmonis.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            ` },
+            { id: 'faktor', title: '3. Faktor Penyebab Masalah Sosial', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Faktor-Faktor Penyebab Masalah Sosial</h2>
+                    <p class="text-gray-700 mb-6">Penyebab masalah sosial dikelompokkan menjadi empat jenis:</p>
+                    
+                    <dl class="space-y-4">
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Faktor Ekonomi</dt>
+                            <dd class="text-gray-700 ml-4">Meliputi kemiskinan, pengangguran, dan kesenjangan pendapatan. Masalah ini berkaitan erat dengan tidak terpenuhinya kebutuhan dasar.</dd>
+                        </div>
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Faktor Budaya</dt>
+                            <dd class="text-gray-700 ml-4">Meliputi kenakalan remaja, perceraian, dan konflik SARA. Dipicu oleh ketidaksesuaian nilai dan norma antar kelompok atau generasi (Cultural Lag).</dd>
+                        </div>
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Faktor Biologis</dt>
+                            <dd class="text-gray-700 ml-4">Meliputi penyakit menular (pandemi), gizi buruk, dan masalah kesehatan publik yang berdampak pada fungsi sosial.</dd>
+                        </div>
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Faktor Psikologis</dt>
+                            <dd class="text-gray-700 ml-4">Meliputi gangguan jiwa (depresi, skizofrenia) yang menyebabkan individu tidak dapat berinteraksi secara normal di masyarakat, termasuk trauma kolektif.</dd>
+                        </div>
+                    </dl>
+
+                </div>
+            ` },
+            { id: 'jenis', title: '4. Jenis-Jenis Masalah Sosial', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Jenis-Jenis Masalah Sosial Utama</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Kemiskinan -->
+                        <div class="p-5 rounded-xl bg-red-50 border-2 border-red-300">
+                            <h3 class="font-extrabold text-xl text-red-700 mb-3">1. Kemiskinan</h3>
+                            <p class="text-gray-700 mb-2">Kondisi ketidakmampuan memenuhi kebutuhan dasar. Dapat bersifat **Absolut** (tidak mampu memenuhi kebutuhan minimum) atau **Relatif** (dibandingkan dengan standar hidup masyarakat sekitar).</p>
+                             <div class="mt-3 w-full h-24 bg-red-100 flex items-center justify-center rounded-lg border border-red-300 p-2">
+                                <svg width="100%" height="100%" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <rect x="0" y="0" width="300" height="100" fill="#FEF2F2"/>
+                                    <rect x="20" y="70" width="260" height="15" rx="5" fill="#EF4444"/>
+                                    <rect x="40" y="45" width="40" height="25" fill="#FCA5A5"/>
+                                    <rect x="130" y="55" width="40" height="15" fill="#FCA5A5"/>
+                                    <rect x="220" y="30" width="40" height="40" fill="#FCA5A5"/>
+                                    <text x="150" y="25" font-family="Inter" font-size="12" text-anchor="middle" fill="#991B1B">Kesenjangan/Kekurangan Sumber Daya</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Kriminalitas -->
+                        <div class="p-5 rounded-xl bg-blue-50 border-2 border-blue-300">
+                            <h3 class="font-extrabold text-xl text-blue-700 mb-3">2. Kriminalitas (Kejahatan)</h3>
+                            <p class="text-gray-700 mb-2">Perilaku yang melanggar hukum dan norma. Dipengaruhi oleh faktor ekonomi, disorganisasi keluarga, dan kurangnya kontrol sosial.</p>
+                            <div class="mt-3 w-full h-24 bg-blue-100 flex items-center justify-center rounded-lg border border-blue-300 p-2">
+                                <svg width="100%" height="100%" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <rect x="0" y="0" width="300" height="100" fill="#EFF6FF"/>
+                                    <circle cx="150" cy="50" r="40" fill="#3B82F6"/>
+                                    <path d="M120 40 L180 40 L180 60 L120 60 Z" fill="white"/>
+                                    <rect x="135" y="45" width="30" height="10" fill="#EF4444"/>
+                                    <text x="150" y="85" font-family="Inter" font-size="12" text-anchor="middle" fill="#1E40AF">Pelanggaran Norma/Hukum</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Kenakalan Remaja -->
+                        <div class="p-5 rounded-xl bg-yellow-50 border-2 border-yellow-300">
+                            <h3 class="font-extrabold text-xl text-yellow-700 mb-3">3. Kenakalan Remaja (Juvenile Delinquency)</h3>
+                            <p class="text-gray-700 mb-2">Perilaku menyimpang yang dilakukan oleh anak atau remaja, seperti tawuran atau penyalahgunaan narkoba. Berkaitan erat dengan *cultural lag*.</p>
+                             <div class="mt-3 w-full h-24 bg-yellow-100 flex items-center justify-center rounded-lg border border-yellow-300 p-2">
+                                <svg width="100%" height="100%" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <rect x="0" y="0" width="300" height="100" fill="#FFFBEB"/>
+                                    <path d="M100 80 L150 20 L200 80 Z" fill="#FCD34D"/>
+                                    <circle cx="150" cy="80" r="10" fill="#F59E0B"/>
+                                    <text x="150" y="55" font-family="Inter" font-size="14" text-anchor="middle" fill="#B45309">⚠️</text>
+                                    <text x="150" y="95" font-family="Inter" font-size="12" text-anchor="middle" fill="#78350F">Penyimpangan Perilaku</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Disorganisasi Keluarga -->
+                        <div class="p-5 rounded-xl bg-green-50 border-2 border-green-300">
+                            <h3 class="font-extrabold text-xl text-green-700 mb-3">4. Disorganisasi Keluarga</h3>
+                            <p class="text-gray-700 mb-2">Pecahnya unit keluarga karena perceraian atau konflik, yang berdampak pada fungsi sosialisasi anak dan kestabilan masyarakat.</p>
+                             <div class="mt-3 w-full h-24 bg-green-100 flex items-center justify-center rounded-lg border border-green-300 p-2">
+                                <svg width="100%" height="100%" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <rect x="0" y="0" width="300" height="100" fill="#ECFDF5"/>
+                                    <rect x="60" y="30" width="80" height="40" rx="5" fill="#34D399"/>
+                                    <rect x="160" y="30" width="80" height="40" rx="5" fill="#059669"/>
+                                    <line x1="140" y1="50" x2="160" y2="50" stroke="#EF4444" stroke-width="4" stroke-dasharray="5,5"/>
+                                    <text x="150" y="85" font-family="Inter" font-size="12" text-anchor="middle" fill="#065F46">Pecah/Konflik Internal</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ` },
+            { id: 'dampak', title: '5. Dampak Permasalahan Sosial', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Dampak Positif dan Negatif Permasalahan Sosial</h2>
+                    <p class="text-gray-700 mb-6">Permasalahan sosial memiliki efek ganda, bisa merusak, namun juga bisa memicu perubahan yang konstruktif.</p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Dampak Negatif -->
+                        <div class="p-5 rounded-xl bg-red-100 border-2 border-red-500 shadow-md">
+                            <h3 class="font-extrabold text-xl text-red-700 mb-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
+                                </svg>
+                                Dampak Negatif
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-800 ml-4 space-y-2">
+                                <li>**Disintegrasi Sosial:** Hilangnya ikatan dan persatuan antar kelompok (misalnya, akibat konflik SARA).</li>
+                                <li>**Meningkatnya Kriminalitas:** Semakin banyak pelanggaran hukum karena desakan ekonomi atau kegagalan sosialisasi.</li>
+                                <li>**Pecahnya Hubungan Keluarga:** Masalah seperti perceraian yang berdampak pada fungsi dan keutuhan keluarga.</li>
+                                <li>**Kerugian Materiil:** Kerusakan fisik dan ekonomi akibat tawuran atau bencana (yang penanganannya lambat).</li>
+                                <li>**Ketidakseimbangan Demografi:** Akibat migrasi besar-besaran (urbanisasi) dari desa ke kota.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Dampak Positif -->
+                        <div class="p-5 rounded-xl bg-green-100 border-2 border-green-500 shadow-md">
+                            <h3 class="font-extrabold text-xl text-green-700 mb-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.035 2.036a.75.75 0 001.06-.011l3.75-5.25z" clip-rule="evenodd" />
+                                </svg>
+                                Dampak Positif
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-800 ml-4 space-y-2">
+                                <li>**Meningkatnya Solidaritas Kelompok:** Masalah eksternal (misalnya pandemi) dapat memperkuat ikatan internal kelompok untuk mengatasi masalah.</li>
+                                <li>**Timbulnya Lembaga Baru:** Untuk mengatasi masalah (misalnya, dibentuknya Badan Narkotika Nasional/BNN akibat masalah narkoba).</li>
+                                <li>**Peningkatan Kesadaran:** Masyarakat menjadi sadar bahwa norma lama sudah tidak efektif dan harus diubah.</li>
+                                <li>**Reformasi Sosial:** Munculnya kritik dan tuntutan untuk mengubah sistem (misalnya, gerakan anti-korupsi).</li>
+                                <li>**Efektivitas Kontrol Sosial:** Aparat dan lembaga penegak hukum menjadi lebih ketat dalam menjalankan tugasnya.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            ` },
+            { id: 'penanggulangan', title: '6. Upaya Penanggulangan', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Upaya Penanggulangan Masalah Sosial</h2>
+                    <p class="text-gray-700 mb-6">Penanganan masalah sosial dapat dilakukan melalui tiga pendekatan utama:</p>
+
+                    <dl class="space-y-4">
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Tindakan Preventif (Pencegahan)</dt>
+                            <dd class="text-gray-700 ml-4">Upaya mencegah masalah sosial sebelum terjadi. Contoh: Program edukasi anti-narkoba, pelatihan keterampilan kerja untuk mencegah pengangguran.</dd>
+                        </div>
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Tindakan Represif (Penindakan)</dt>
+                            <dd class="text-gray-700 ml-4">Upaya penindakan dan penegakan hukum setelah masalah terjadi. Contoh: Penangkapan pelaku kriminalitas, pemberian sanksi bagi pelanggar norma.</dd>
+                        </div>
+                        <div class="border-b pb-2">
+                            <dt class="font-bold text-lg text-sosiologi-dark">Tindakan Rehabilitatif (Pemulihan)</dt>
+                            <dd class="text-gray-700 ml-4">Upaya pemulihan korban atau pelaku agar dapat kembali berfungsi normal di masyarakat. Contoh: Rehabilitasi narkoba, program pelatihan mental bagi mantan narapidana.</dd>
+                        </div>
+                    </dl>
+                </div>
+            ` },
+            { id: 'referensi', title: '7. Sumber Referensi', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-sosiologi-primary mb-4">Sumber Referensi</h2>
+                    <p class="text-gray-700 mb-4">Materi ini disusun berdasarkan sumber-sumber utama Sosiologi:</p>
+                    
+                    <ul class="list-disc list-inside space-y-3 text-gray-700 ml-4">
+                        <li>Soerjono Soekanto. (2014). **Sosiologi Suatu Pengantar**. Jakarta: Rajawali Pers. (Klasik mengenai konsep dan kriteria masalah sosial)</li>
+                        <li>Koentjaraningrat. (1990). **Pengantar Ilmu Antropologi**. Jakarta: Rineka Cipta. (Materi terkait faktor budaya)</li>
+                        <li>Kartono, Kartini. (2009). **Patologi Sosial 1: Kenakalan Remaja**. Jakarta: Rajawali Pers. (Materi spesifik kenakalan remaja)</li>
+                        <li>Tim Sosiologi Kemendikbud. (2018). **Buku Siswa Sosiologi SMA/MA Kelas XI Kurikulum 2013 Edisi Revisi**.</li>
+                    </ul>
+
+                    <div class="mt-6 p-4 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">
+                        <p class="font-semibold text-sosiologi-dark">Catatan:</p>
+                        <p class="text-gray-700 text-sm">Eksplorasi literatur akan membantu memperkaya pemahaman Anda.</p>
+                    </div>
+                </div>
+            ` },
+            { id: 'latihan', title: '8. Latihan Soal Interaktif', content: `
+                <div class="content-card">
+                    <h2 class="text-2xl font-bold text-red-600 mb-4">Latihan Soal Interaktif</h2>
+                    <p class="text-gray-700 mb-6">Uji pemahaman Anda terhadap materi Permasalahan Sosial. Terdapat 3 jenis soal: **Kategori** (Benar/Salah), **MCMA** (Pilih Jawaban Benar Lebih dari Satu), dan **PGB** (Pilih Satu Jawaban Tepat).</p>
+                    
+                    <div id="quiz-container" class="space-y-6">
+                        <!-- Soal akan di-render di sini -->
+                    </div>
+
+                    <button id="submit-quiz-btn" onclick="submitQuiz()" class="mt-8 w-full md:w-auto px-6 py-3 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-105 disabled:opacity-50">
+                        Periksa Jawaban
+                    </button>
+
+                    <div id="quiz-result" class="mt-6 p-4 rounded-lg hidden">
+                        <!-- Hasil Kuis akan ditampilkan di sini -->
+                    </div>
+                </div>
+            ` },
+        ];
+
+        // Data Soal Kuis (20 Soal: 5 Kategori, 5 MCMA, 10 PGB)
+        const questions = [
+            // --- 5 Soal Kategori (Categorical) dengan Kasus ---
+            {
+                type: "Categorical",
+                case: `**KASUS 1:** Di perkotaan, ada kelompok kecil masyarakat yang menyadari bahwa tingginya angka pengangguran melanggar nilai-nilai sosial tentang kesejahteraan, namun sebagian besar warga justru menganggap pengangguran sebagai masalah pribadi yang tidak perlu diurus bersama.`,
+                question: "Analisis kasus ini berdasarkan kriteria masalah sosial:",
+                statements: [
+                    { text: "Telah memenuhi kriteria memerlukan tindakan kolektif.", answer: true, explanation: "Benar. Walaupun mayoritas abai, fenomena ini adalah masalah publik yang secara inheren memerlukan penanganan bersama." },
+                    { text: "Tidak memenuhi kriteria adanya pihak yang menetapkan (aktor).", answer: false, explanation: "Salah. Kelompok kecil masyarakat yang menyadari dan menyuarakan masalah tersebut telah bertindak sebagai 'aktor' yang menetapkan masalah." },
+                    { text: "Pengangguran pada kasus ini dapat dikategorikan sebagai masalah biologis.", answer: false, explanation: "Salah. Pengangguran adalah masalah yang disebabkan oleh faktor Ekonomi dan struktur sosial, bukan biologis." }
+                ]
+            },
+            {
+                type: "Categorical",
+                case: `**KASUS 2:** Keluarga 'D' mengalami perceraian yang diikuti oleh masalah finansial dan kenakalan remaja pada anak-anak mereka. Anak-anak tersebut sering terlibat tawuran dan bolos sekolah.`,
+                question: "Analisis kasus ini berdasarkan kategori berikut:",
+                statements: [
+                    { text: "Perceraian merupakan bentuk dari disorganisasi keluarga.", answer: true, explanation: "Benar. Perceraian adalah manifestasi dari pecahnya unit keluarga dan disorganisasi." },
+                    { text: "Faktor penyebab utama kenakalan remaja pada kasus ini adalah Faktor Psikologis.", answer: false, explanation: "Salah. Kenakalan remaja yang dipicu disorganisasi keluarga lebih tepat dikategorikan dalam Faktor Budaya (kegagalan sosialisasi nilai)." },
+                    { text: "Upaya menangani anak-anak yang tawuran dapat dilakukan dengan tindakan represif.", answer: true, explanation: "Benar. Penindakan dan sanksi (seperti penangkapan/hukuman) adalah tindakan represif." }
+                ]
+            },
+            {
+                type: "Categorical",
+                case: `**KASUS 3:** Sebuah desa terpencil menghadapi wabah penyakit menular yang cepat menyebar. Pemerintah segera mengirim tim medis dan melakukan karantina untuk membatasi penyebaran virus di luar desa tersebut.`,
+                question: "Analisis kasus ini berdasarkan kategori berikut:",
+                statements: [
+                    { text: "Wabah penyakit diklasifikasikan sebagai masalah sosial faktor budaya.", answer: false, explanation: "Salah. Wabah penyakit menular diklasifikasikan sebagai masalah sosial berdasarkan Faktor Biologis." },
+                    { text: "Upaya karantina yang dilakukan pemerintah termasuk tindakan preventif.", answer: true, explanation: "Benar. Karantina adalah upaya pencegahan (preventif) agar masalah tidak menyebar ke wilayah lain." },
+                    { text: "Dampak langsung dari kasus ini adalah disintegrasi sosial antarwarga desa.", answer: false, explanation: "Salah. Dampak langsungnya lebih kepada krisis kesehatan publik (fisik), bukan disintegrasi sosial." }
+                ]
+            },
+            {
+                type: "Categorical",
+                case: `**KASUS 4:** Seorang pemuda yang baru keluar dari penjara karena kasus pencurian ditolak di mana-mana saat melamar pekerjaan, meskipun ia memiliki skill yang memadai. Ia merasa putus asa dan terdorong untuk mencuri lagi.`,
+                question: "Analisis kasus ini berdasarkan kategori berikut:",
+                statements: [
+                    { text: "Penolakan kerja yang dialami pemuda ini merupakan masalah sosial, bukan masalah individu.", answer: true, explanation: "Benar. Stigma sosial dan kurangnya program reintegrasi (masalah struktural) lah yang menciptakan masalah." },
+                    { text: "Dorongan mencuri lagi adalah dampak dari disorganisasi keluarga.", answer: false, explanation: "Salah. Dorongan mencuri lebih disebabkan oleh kegagalan re-sosialisasi dan masalah ekonomi (faktor penyebab kriminalitas)." },
+                    { text: "Pemberian keterampilan kerja sebelum ia keluar penjara termasuk tindakan rehabilitatif.", answer: false, explanation: "Salah. Pemberian keterampilan sebelum keluar penjara adalah Tindakan Preventif." }
+                ]
+            },
+            {
+                type: "Categorical",
+                case: `**KASUS 5:** Di suatu negara, meskipun undang-undang menjamin kesetaraan gender, dalam praktik budaya, perempuan masih dilarang menduduki posisi kepemimpinan adat, yang memicu protes dari kelompok aktivis perempuan.`,
+                question: "Analisis kasus ini berdasarkan kategori berikut:",
+                statements: [
+                    { text: "Kasus ini menunjukkan adanya ketidaksesuaian antara nilai dan norma (cultural lag).", answer: true, explanation: "Benar. Terdapat ketidaksesuaian antara norma hukum (kesetaraan) dan norma budaya (pelarangan)." },
+                    { text: "Masalah ini diklasifikasikan dalam Faktor Psikologis.", answer: false, explanation: "Salah. Ini adalah masalah Faktor Budaya/Sosial, terkait nilai dan norma yang tertanam kuat dalam masyarakat." },
+                    { text: "Upaya aktivis termasuk bagian dari penanggulangan represif.", answer: false, explanation: "Salah. Protes dan advokasi adalah upaya preventif dan perubahan nilai, bukan represif (penindakan)." }
+                ]
+            },
+
+            // --- 5 Soal MCMA (Multiple Choice Multiple Answer) dengan Kasus ---
+            {
+                type: "MCMA",
+                case: `**KASUS 6:** Seorang anak putus sekolah karena kemiskinan. Ia kemudian menjadi pengamen di jalanan, sering terlibat perkelahian dengan kelompok pengamen lain, dan akhirnya ditangkap polisi karena pencopetan.`,
+                question: "Pilihlah masalah sosial dan faktor penyebab yang saling berkaitan dalam kasus ini! (Jawaban Benar Lebih Dari Satu)",
+                options: [
+                    "Masalah sosial: Kenakalan Remaja",
+                    "Faktor penyebab: Ekonomi",
+                    "Masalah sosial: Kriminalitas",
+                    "Faktor penyebab: Biologis",
+                    "Masalah sosial: Disorganisasi Keluarga"
+                ],
+                answer: ["Masalah sosial: Kenakalan Remaja", "Faktor penyebab: Ekonomi", "Masalah sosial: Kriminalitas"],
+                explanation: "Anak ini terlibat **Kenakalan Remaja** (perkelahian) dan **Kriminalitas** (pencopetan). Akar masalah utamanya adalah **Faktor Ekonomi** (kemiskinan yang menyebabkan putus sekolah)."
+            },
+            {
+                type: "MCMA",
+                case: `**KASUS 7:** Pemerintah meluncurkan program pelatihan intensif bagi pengangguran lulusan SMK dan memberikan suntikan modal bagi usaha kecil.`,
+                question: "Pilihlah tujuan dan jenis tindakan penanggulangan yang dilakukan pemerintah! (Jawaban Benar Lebih Dari Satu)",
+                options: [
+                    "Bertujuan menanggulangi masalah Kriminalitas.",
+                    "Bertujuan menanggulangi masalah Kemiskinan/Pengangguran.",
+                    "Merupakan tindakan represif.",
+                    "Merupakan tindakan preventif.",
+                    "Merupakan tindakan rehabilitatif."
+                ],
+                answer: ["Bertujuan menanggulangi masalah Kemiskinan/Pengangguran.", "Merupakan tindakan preventif."],
+                explanation: "Program ini bersifat **Preventif** (mencegah masalah sebelum terjadi) dan secara spesifik menargetkan masalah **Kemiskinan/Pengangguran**."
+            },
+            {
+                type: "MCMA",
+                case: `**KASUS 8:** Dalam sebuah keluarga, Ayah dan Ibu sering bertengkar hebat yang berujung pada kekerasan fisik. Anak-anak menyaksikan kejadian ini berulang kali dan menunjukkan gejala depresi dan fobia sosial.`,
+                question: "Pilihlah masalah sosial yang terjadi dalam lingkup keluarga ini! (Jawaban Benar Lebih Dari Satu)",
+                options: [
+                    "Kriminalitas (Kekerasan Fisik)",
+                    "Disorganisasi Keluarga (Konflik dan Pecah)",
+                    "Kemiskinan Relatif",
+                    "Masalah Sosial Faktor Psikologis (Depresi Anak)",
+                    "Kenakalan Remaja"
+                ],
+                answer: ["Kriminalitas (Kekerasan Fisik)", "Disorganisasi Keluarga (Konflik dan Pecah)", "Masalah Sosial Faktor Psikologis (Depresi Anak)"],
+                explanation: "Kekerasan fisik adalah **Kriminalitas**. Pertengkaran hebat menunjukkan **Disorganisasi Keluarga**. Dampak pada anak (depresi) adalah masalah sosial **Faktor Psikologis**."
+            },
+            {
+                type: "MCMA",
+                case: `**KASUS 9:** Komunitas A memiliki tradisi konsumsi minuman keras dalam ritual adat. Komunitas B menganggap ini sebagai penyimpangan moral. Konflik nilai pun terjadi.`,
+                question: "Pilihlah faktor penyebab dan jenis masalah yang paling tepat berdasarkan kasus ini! (Jawaban Benar Lebih Dari Satu)",
+                options: [
+                    "Faktor penyebab: Budaya",
+                    "Faktor penyebab: Biologis",
+                    "Masalah: Pelanggaran Norma",
+                    "Masalah: Kesenjangan Ekonomi",
+                    "Dampak: Cultural Shock"
+                ],
+                answer: ["Faktor penyebab: Budaya", "Masalah: Pelanggaran Norma"],
+                explanation: "Konflik terjadi karena perbedaan nilai dan tradisi, yang termasuk **Faktor Budaya**. Dampaknya adalah **Pelanggaran Norma** (norma komunitas B dilanggar oleh komunitas A, dan sebaliknya)."
+            },
+            {
+                type: "MCMA",
+                case: `**KASUS 10:** Seorang pecandu narkoba yang baru selesai menjalani masa hukuman di penjara dimasukkan ke panti rehabilitasi untuk memulihkan kondisi fisik dan mentalnya, diikuti program pelatihan kerja.`,
+                question: "Tindakan apa saja yang diterapkan pada kasus ini? (Jawaban Benar Lebih Dari Satu)",
+                options: [
+                    "Tindakan Represif (Hukuman Penjara)",
+                    "Tindakan Preventif (Pelatihan Kerja)",
+                    "Tindakan Rehabilitatif (Pemulihan Mental)",
+                    "Tindakan Karantina",
+                    "Tindakan Ajudikasi"
+                ],
+                answer: ["Tindakan Represif (Hukuman Penjara)", "Tindakan Preventif (Pelatihan Kerja)", "Tindakan Rehabilitatif (Pemulihan Mental)"],
+                explanation: "Hukuman penjara adalah **Represif** (penindakan). Pemulihan di panti adalah **Rehabilitatif**. Pelatihan kerja adalah **Preventif** (mencegah kambuh/kembali ke kejahatan)."
+            },
+
+            // --- 10 Soal PGB (Pilihan Ganda Biasa) dengan Kasus ---
+            {
+                type: "PGB",
+                case: `**KASUS 11:** Seorang sosiolog berpendapat bahwa sebuah masalah hanya bisa disebut 'masalah sosial' jika ia berasal dari masyarakat (bukan individu) dan memerlukan pemecahan secara bersama.`,
+                question: "Pendapat tersebut menekankan bahwa masalah sosial harus memenuhi kriteria...",
+                options: ["Hanya dialami kelompok kecil", "Tidak ada kesesuaian nilai", "Tidak perlu tindakan kolektif", "Sumber masalah harus dari kondisi sosial", "Memiliki dampak sementara"],
+                answer: "Sumber masalah harus dari kondisi sosial",
+                explanation: "Kriteria utama masalah sosial adalah masalah tersebut harus berasal dari kondisi dan struktur sosial, bukan hanya pengalaman personal atau individu."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 12:** Tingginya angka kriminalitas di suatu wilayah disebabkan oleh ledakan populasi yang tidak diimbangi dengan lapangan kerja, sehingga memicu banyak pengangguran yang putus asa.`,
+                question: "Masalah sosial (Kriminalitas) pada kasus ini secara primer disebabkan oleh faktor...",
+                options: ["Biologis", "Budaya", "Psikologis", "Ekonomi", "Kependudukan (demografi)"],
+                answer: "Ekonomi",
+                explanation: "Kemiskinan dan pengangguran (kurangnya lapangan kerja) adalah faktor utama yang diklasifikasikan sebagai Faktor Ekonomi."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 13:** Seorang anak yang baru pindah dari desa ke kota metropolitan mengalami tekanan mental luar biasa karena lingkungan barunya sangat individualis dan tidak memiliki ikatan komunitas yang kuat seperti di desanya.`,
+                question: "Anak tersebut mengalami masalah sosial yang disebabkan oleh faktor...",
+                options: ["Faktor Budaya", "Faktor Biologis", "Faktor Psikologis", "Faktor Ekonomi", "Faktor Koersi"],
+                answer: "Faktor Psikologis",
+                explanation: "Tekanan mental, depresi, atau fobia yang diakibatkan oleh lingkungan sosial dikategorikan sebagai masalah sosial faktor psikologis."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 14:** Meskipun aturan larangan merokok di area sekolah sudah diterapkan, banyak siswa yang masih melanggarnya di toilet. Pihak sekolah kemudian memberikan sanksi tegas berupa skorsing bagi yang tertangkap.`,
+                question: "Tindakan skorsing oleh pihak sekolah dalam kasus tersebut termasuk dalam upaya penanggulangan...",
+                options: ["Preventif", "Rehabilitatif", "Kolektif", "Represif", "Asimilatif"],
+                answer: "Represif",
+                explanation: "Tindakan Represif adalah penindakan atau pemberian sanksi setelah terjadi pelanggaran."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 15:** Di tengah kemajuan teknologi yang pesat, ada sebagian masyarakat yang masih memegang teguh tradisi kuno yang menghambat pembangunan dan modernisasi, menciptakan ketegangan sosial.`,
+                question: "Ketidaksesuaian antara kemajuan teknologi dan norma budaya yang lambat berubah ini disebut...",
+                options: ["Disintegrasi Sosial", "Cultural Lag", "Cultural Shock", "Disorganisasi Keluarga", "Koersi Budaya"],
+                answer: "Cultural Lag",
+                explanation: "Cultural Lag (ketertinggalan budaya) adalah kondisi di mana aspek non-material budaya (nilai, norma) tertinggal dari aspek material budaya (teknologi)."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 16:** Sebuah yayasan membuka pusat pelatihan keterampilan gratis dan memberikan pendampingan psikologis berkelanjutan bagi mantan narapidana.`,
+                question: "Fokus utama dari program yayasan tersebut adalah tindakan...",
+                options: ["Preventif", "Represif", "Ajudikasi", "Koersi", "Rehabilitatif"],
+                answer: "Rehabilitatif",
+                explanation: "Program ini bertujuan memulihkan kembali fungsi sosial dan mental mantan narapidana agar bisa diterima kembali oleh masyarakat."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 17:** Masalah kemiskinan di suatu negara disebabkan oleh sistem ekonomi yang oligarkis, di mana sumber daya hanya dikuasai oleh segelintir elite politik dan bisnis.`,
+                question: "Jenis kemiskinan yang timbul akibat struktur sosial yang tidak adil dan berat sebelah ini disebut...",
+                options: ["Kemiskinan Personal", "Kemiskinan Absolut", "Kemiskinan Relatif", "Kemiskinan Struktural", "Kemiskinan Budaya"],
+                answer: "Kemiskinan Struktural",
+                explanation: "Kemiskinan Struktural adalah kemiskinan yang disebabkan oleh kebijakan atau struktur sosial ekonomi yang tidak adil atau memihak."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 18:** Sebuah kota mengalami peningkatan signifikan kasus kejahatan pencurian kecil-kecilan. Peningkatan ini terjadi setelah banyak pabrik ditutup dan ribuan pekerja di-PHK.`,
+                question: "Peningkatan kriminalitas pada kasus ini paling erat kaitannya dengan masalah sosial jenis...",
+                options: ["Kenakalan Remaja", "Disorganisasi Keluarga", "Kesenjangan Antar-generasi", "Kemiskinan", "Faktor Biologis"],
+                answer: "Kemiskinan",
+                explanation: "Penutupan pabrik (PHK) menciptakan masalah pengangguran dan kemiskinan, yang sering menjadi pemicu utama kriminalitas."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 19:** Pasca konflik horizontal di suatu daerah, banyak warga yang kehilangan tempat tinggal dan mata pencaharian. Hal ini memicu hilangnya rasa persatuan dan kepercayaan antarwarga.`,
+                question: "Hilangnya rasa persatuan dan kepercayaan antarwarga sebagai dampak masalah sosial disebut...",
+                options: ["Disorganisasi", "Akomodasi", "Disintegrasi", "Asimilasi", "Konsiliasi"],
+                answer: "Disintegrasi",
+                explanation: "Disintegrasi sosial adalah proses memudarnya nilai dan norma yang ditandai dengan hilangnya ikatan antarwarga."
+            },
+            {
+                type: "PGB",
+                case: `**KASUS 20:** Program bantuan sosial yang diluncurkan pemerintah kepada masyarakat miskin, bertujuan untuk memastikan mereka dapat memenuhi kebutuhan makanan dan kesehatan minimum.`,
+                question: "Program bantuan sosial tersebut secara langsung mengatasi jenis kemiskinan...",
+                options: ["Kemiskinan Relatif", "Kemiskinan Struktural", "Kemiskinan Absolut", "Kemiskinan Kultural", "Kemiskinan Sektoral"],
+                answer: "Kemiskinan Absolut",
+                explanation: "Kemiskinan Absolut adalah ketidakmampuan memenuhi kebutuhan minimum (pangan, sandang, kesehatan), yang menjadi fokus utama program bantuan dasar."
+            },
+        ];
+
+        let userAnswers = {}; // Untuk menyimpan jawaban pengguna
+
+        // Fungsi untuk merender tombol navigasi
+        function renderNav() {
+            const navTabs = document.getElementById('nav-tabs');
+            navTabs.innerHTML = '';
+            materials.forEach((item, index) => {
+                const button = document.createElement('button');
+                button.textContent = item.title;
+                button.id = `nav-${item.id}`;
+                button.className = 'tab-button text-sm lg:text-base px-3 py-2 lg:p-3 rounded-lg text-gray-600 hover:bg-sosiologi-light hover:text-sosiologi-primary transition duration-200 w-full text-left';
+                button.onclick = () => showContent(item.id);
+                navTabs.appendChild(button);
+            });
+        }
+
+        // Fungsi untuk menampilkan konten yang dipilih
+        function showContent(id) {
+            const contentDisplay = document.getElementById('content-display');
+            const selectedMaterial = materials.find(m => m.id === id);
+
+            // Perbarui konten
+            if (selectedMaterial) {
+                contentDisplay.innerHTML = selectedMaterial.content;
+            } else {
+                contentDisplay.innerHTML = '<p class="content-card text-red-500">Materi tidak ditemukan.</p>';
+            }
+
+            // Perbarui status 'active' pada tombol navigasi
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`nav-${id}`).classList.add('active');
+
+            // Jika konten yang ditampilkan adalah kuis, render soal
+            if (id === 'latihan') {
+                renderQuiz();
+            } else {
+                // Sembunyikan hasil kuis jika bukan tab kuis
+                const resultDiv = document.getElementById('quiz-result');
+                if (resultDiv) resultDiv.classList.add('hidden');
+                // Sembunyikan tombol submit kuis
+                const submitBtn = document.getElementById('submit-quiz-btn');
+                if (submitBtn) submitBtn.classList.add('hidden');
+            }
+        }
+
+        // Fungsi untuk merender kuis/latihan soal
+        function renderQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const submitBtn = document.getElementById('submit-quiz-btn');
+            
+            quizContainer.innerHTML = '';
+            submitBtn.classList.remove('hidden'); // Tampilkan tombol submit
+
+            questions.forEach((q, index) => {
+                const qIndex = index + 1;
+                const questionDiv = document.createElement('div');
+                questionDiv.id = `question-${qIndex}`;
+                questionDiv.className = 'p-5 bg-white rounded-xl shadow-md border border-red-200';
+                
+                // Tambahkan kasus jika ada
+                let caseHtml = q.case ? `<div class="p-3 mb-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 text-sm text-gray-800">${q.case}</div>` : '';
+
+                let optionsHtml = '';
+                let instruction = '';
+
+                if (q.type === "PGB") {
+                    instruction = '<span class="text-red-600 font-semibold">(PILIH SATU JAWABAN TEPAT)</span>';
+                    optionsHtml = q.options.map((option, optIndex) => `
+                        <button 
+                            class="quiz-option pgb-option" 
+                            data-question="${qIndex}" 
+                            data-option="${option}"
+                            onclick="selectPGBOption(${qIndex}, '${option.replace(/'/g, "\\'")}')"
+                        >
+                            ${String.fromCharCode(65 + optIndex)}. ${option}
+                        </button>
+                    `).join('');
+                } else if (q.type === "MCMA") {
+                    instruction = '<span class="text-red-600 font-semibold">(PILIH SEMUA JAWABAN YANG BENAR)</span>';
+                    optionsHtml = q.options.map((option, optIndex) => `
+                        <button 
+                            class="quiz-option mcma-option" 
+                            data-question="${qIndex}" 
+                            data-option="${option}"
+                            onclick="selectMCMAOption(${qIndex}, event.target, '${option.replace(/'/g, "\\'")}')"
+                        >
+                            ${String.fromCharCode(65 + optIndex)}. ${option}
+                        </button>
+                    `).join('');
+                } else if (q.type === "Categorical") {
+                    instruction = '<span class="text-red-600 font-semibold">(TENTUKAN BENAR ATAU SALAH)</span>';
+                    
+                    optionsHtml = `
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-emerald-50">
+                                    <tr>
+                                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider w-3/5">Pernyataan</th>
+                                        <th class="px-3 py-2 text-center text-xs font-medium text-gray-700 uppercase tracking-wider w-1/5">Benar</th>
+                                        <th class="px-3 py-2 text-center text-xs font-medium text-gray-700 uppercase tracking-wider w-1/5">Salah</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200" id="categorical-options-${qIndex}">
+                                    ${q.statements.map((stmt, stmtIndex) => `
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-3 py-2 whitespace-normal text-sm font-medium text-gray-900">${stmtIndex + 1}. ${stmt.text}</td>
+                                            <td class="px-3 py-2 text-center">
+                                                <button 
+                                                    class="categorical-option border-green-500 text-green-700 hover:bg-green-100" 
+                                                    data-statement="${stmtIndex}" 
+                                                    data-value="true"
+                                                    onclick="selectCategoricalOption(${qIndex}, ${stmtIndex}, true, event.target)">
+                                                    Benar
+                                                </button>
+                                            </td>
+                                            <td class="px-3 py-2 text-center">
+                                                <button 
+                                                    class="categorical-option border-red-500 text-red-700 hover:bg-red-100" 
+                                                    data-statement="${stmtIndex}" 
+                                                    data-value="false"
+                                                    onclick="selectCategoricalOption(${qIndex}, ${stmtIndex}, false, event.target)">
+                                                    Salah
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    // Initialize userAnswers for categorical type
+                    userAnswers[qIndex] = q.statements.map(() => null);
+                }
+
+                questionDiv.innerHTML = `
+                    ${caseHtml}
+                    <p class="font-bold text-lg text-sosiologi-dark mb-3">Soal ${qIndex} ${instruction}:</p>
+                    <p class="text-gray-700 mb-3">${q.type !== 'Categorical' ? q.question : ''}</p>
+                    <div id="options-${qIndex}">${optionsHtml}</div>
+                    <p id="feedback-${qIndex}" class="mt-2 text-sm italic hidden"></p>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+            // Reset jawaban dan tampilan, kecuali untuk inisialisasi MCMA/Categorical di atas
+            if (Object.keys(userAnswers).length === 0) userAnswers = {}; 
+        }
+
+        // Fungsi untuk memilih PGB (Pilihan Ganda Biasa)
+        function selectPGBOption(qIndex, selectedOption) {
+            userAnswers[qIndex] = selectedOption;
+            
+            document.querySelectorAll(`#options-${qIndex} .pgb-option`).forEach(btn => {
+                btn.classList.remove('bg-emerald-100', 'border-sosiologi-primary');
+            });
+
+            const selectedBtn = document.querySelector(`#options-${qIndex} button[data-option="${selectedOption.replace(/'/g, "\\'")}"]`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('bg-emerald-100', 'border-sosiologi-primary');
+            }
+        }
+
+        // Fungsi untuk memilih MCMA (Multiple Choice Multiple Answer)
+        function selectMCMAOption(qIndex, targetButton, selectedOption) {
+            if (!userAnswers[qIndex] || !Array.isArray(userAnswers[qIndex])) {
+                userAnswers[qIndex] = [];
+            }
+            
+            const currentAnswers = userAnswers[qIndex];
+            const optionIndex = currentAnswers.indexOf(selectedOption);
+
+            if (optionIndex > -1) {
+                currentAnswers.splice(optionIndex, 1);
+                targetButton.classList.remove('mcma-selected');
+            } else {
+                currentAnswers.push(selectedOption);
+                targetButton.classList.add('mcma-selected');
+            }
+            userAnswers[qIndex] = currentAnswers;
+        }
+
+        // Fungsi untuk memilih Jawaban Kategori
+        function selectCategoricalOption(qIndex, stmtIndex, selectedValue, targetButton) {
+            if (!userAnswers[qIndex] || !Array.isArray(userAnswers[qIndex])) {
+                userAnswers[qIndex] = questions[qIndex - 1].statements.map(() => null);
+            }
+            
+            // Konversi nilai boolean menjadi string 'true' atau 'false' untuk penyimpanan
+            userAnswers[qIndex][stmtIndex] = selectedValue; 
+            
+            // Reset visual untuk baris (statement) yang dipilih
+            const row = targetButton.closest('tr');
+            row.querySelectorAll('.categorical-option').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.classList.remove('bg-sosiologi-primary', 'text-white', 'border-sosiologi-primary');
+                btn.classList.add('border-gray-300');
+            });
+
+            // Tandai opsi yang dipilih
+            targetButton.classList.add('selected', 'bg-sosiologi-primary', 'text-white', 'border-sosiologi-primary');
+        }
+
+        // Fungsi untuk memeriksa dan menampilkan hasil kuis
+        function submitQuiz() {
+            let score = 0;
+            const quizResult = document.getElementById('quiz-result');
+            const submitBtn = document.getElementById('submit-quiz-btn');
+
+            questions.forEach((q, index) => {
+                const qIndex = index + 1;
+                const userAnswer = userAnswers[qIndex] || (q.type === 'MCMA' ? [] : (q.type === 'Categorical' ? q.statements.map(() => null) : null));
+                const correctAnswer = q.answer || q.statements;
+                const feedbackEl = document.getElementById(`feedback-${qIndex}`);
+                
+                let isCorrect = false;
+
+                // Nonaktifkan semua tombol klik
+                document.querySelectorAll(`#options-${qIndex} button`).forEach(btn => {
+                    btn.onclick = null;
+                    btn.classList.add('cursor-default');
+                });
+
+                if (q.type === "PGB") {
+                    // Logika PGB
+                    isCorrect = (userAnswer === correctAnswer);
+                    
+                    document.querySelectorAll(`#options-${qIndex} .pgb-option`).forEach(btn => {
+                        const optionText = btn.getAttribute('data-option');
+                        btn.classList.remove('bg-emerald-100', 'border-sosiologi-primary');
+
+                        if (optionText === correctAnswer) {
+                            btn.classList.add('correct');
+                        } else if (optionText === userAnswer && !isCorrect) {
+                            btn.classList.add('incorrect');
+                        }
+                    });
+
+                } else if (q.type === "MCMA") {
+                    // Logika MCMA
+                    const sortedUserAnswers = userAnswer.slice().sort();
+                    const sortedCorrectAnswers = correctAnswer.slice().sort();
+
+                    isCorrect = (
+                        sortedUserAnswers.length === sortedCorrectAnswers.length &&
+                        sortedUserAnswers.every((val, i) => val === sortedCorrectAnswers[i])
+                    );
+
+                    document.querySelectorAll(`#options-${qIndex} .mcma-option`).forEach(btn => {
+                        const option = btn.getAttribute('data-option');
+                        const isUserSelected = userAnswer.includes(option);
+                        const isActualCorrect = correctAnswer.includes(option);
+
+                        btn.classList.remove('mcma-selected');
+
+                        if (isActualCorrect) {
+                            btn.classList.add('correct');
+                        }
+                        if (isUserSelected && !isActualCorrect) {
+                            btn.classList.add('incorrect'); 
+                        }
+                    });
+
+                } else if (q.type === "Categorical") {
+                    // Logika Categorical (Semua 3 harus benar)
+                    let correctCount = 0;
+                    let allStatementsCorrect = true;
+                    
+                    q.statements.forEach((stmt, stmtIndex) => {
+                        const userVal = userAnswer[stmtIndex];
+                        const correctVal = stmt.answer; // boolean true/false
+
+                        const isStatementCorrect = (userVal === correctVal);
+                        
+                        // Tandai visual di tabel
+                        const row = document.querySelector(`#categorical-options-${qIndex} tr:nth-child(${stmtIndex + 1})`);
+                        
+                        row.querySelectorAll('.categorical-option').forEach(btn => {
+                            const btnValue = btn.getAttribute('data-value') === 'true'; // Konversi kembali ke boolean
+                            btn.classList.remove('selected', 'bg-sosiologi-primary', 'text-white', 'border-sosiologi-primary');
+                            
+                            // Tampilkan jawaban BENAR sebenarnya (hijau)
+                            if (btnValue === correctVal) {
+                                btn.classList.add('correct');
+                            }
+                            
+                            // Tampilkan jawaban user yang SALAH (merah)
+                            if (btnValue === userVal && !isStatementCorrect) {
+                                btn.classList.add('incorrect');
+                            }
+                        });
+
+
+                        if (isStatementCorrect) {
+                            correctCount++;
+                        } else {
+                            allStatementsCorrect = false;
+                        }
+                    });
+
+                    isCorrect = allStatementsCorrect;
+                    
+                    if (!isCorrect) {
+                        feedbackEl.innerHTML = `Jawaban Anda Salah. Anda hanya menjawab benar ${correctCount} dari 3 pernyataan.<br><br><strong>Penjelasan per Pernyataan:</strong>`;
+                        q.statements.forEach((stmt, stmtIndex) => {
+                            const userVal = userAnswer[stmtIndex];
+                            const correctVal = stmt.answer;
+                            const status = userVal === correctVal ? 'Benar' : 'Salah';
+                            const correctText = correctVal ? 'Benar' : 'Salah';
+                            feedbackEl.innerHTML += `<br>- Pernyataan ${stmtIndex + 1} (${status}). Jawaban seharusnya ${correctText}. (${stmt.explanation})`;
+                        });
+                    }
+                }
+                
+                if (isCorrect) {
+                    score++;
+                    feedbackEl.textContent = 'Jawaban Anda Benar!';
+                    feedbackEl.className = 'mt-2 text-sm italic text-green-600 font-semibold p-2 bg-green-50 rounded-md';
+                } else if (q.type !== 'Categorical') {
+                    // Tampilkan Feedback untuk PGB/MCMA yang salah
+                    const correctAnswersText = q.type === "MCMA" ? correctAnswer.join(", ") : correctAnswer;
+                    feedbackEl.textContent = `Jawaban Anda Salah. Jawaban yang benar adalah: ${correctAnswersText}. Penjelasan: ${q.explanation}`;
+                    feedbackEl.className = 'mt-2 text-sm italic text-red-600 font-semibold p-2 bg-red-50 rounded-md';
+                }
+                feedbackEl.classList.remove('hidden');
+
+            });
+
+            // Tampilkan hasil akhir
+            const totalQuestions = questions.length;
+            const percentage = (score / totalQuestions) * 100;
+            quizResult.classList.remove('hidden');
+            quizResult.className = `mt-6 p-6 rounded-lg ${percentage >= 70 ? 'bg-green-100 border-green-500' : 'bg-red-100 border-red-500'} border-2`;
+            quizResult.innerHTML = `
+                <h3 class="text-xl font-bold ${percentage >= 70 ? 'text-green-800' : 'text-red-800'}">Hasil Kuis Anda</h3>
+                <p class="text-lg mt-2">Skor: <span class="font-extrabold">${score} / ${totalQuestions}</span></p>
+                <p class="text-lg">Persentase: <span class="font-extrabold">${percentage.toFixed(0)}%</span></p>
+                <p class="mt-3 ${percentage >= 70 ? 'text-green-700' : 'text-red-700'}">
+                    ${percentage >= 70 ? 'Kerja bagus! Pemahaman Anda tentang materi ini sangat baik.' : 'Terus semangat! Perhatikan kembali materi yang masih kurang dipahami.'}
+                </p>
+            `;
+            
+            submitBtn.textContent = 'Coba Lagi? (Reset Kuis)';
+            submitBtn.onclick = () => {
+                showContent('latihan'); // Muat ulang tab kuis
+                quizResult.classList.add('hidden'); // Sembunyikan hasil
+            };
+        }
+
+        // Inisialisasi aplikasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNav();
+            // Tampilkan materi pertama (Pengertian Konflik) secara default
+            showContent(materials[0].id); 
+        });
+    </script>
+</body>
+</html>
